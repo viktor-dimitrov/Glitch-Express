@@ -1,10 +1,10 @@
 
 import express from 'express';
 
-import openaiControler from './controllers/openaiController.js';
+import openaiController from './controllers/openaiController.js';
 
  const router = express.Router();
 
-router.use('/', openaiControler);
+router.use('/', openaiController);
 
 export default router
