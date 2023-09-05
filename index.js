@@ -1,23 +1,14 @@
-import * as dotenv from 'dotenv';
-import OpenAI  from "openai";
+import 'dotenv/config';
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import readline from "readline";
-
-dotenv.config();
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-})
-
+import router from './router.js';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 mongoose.set('strictQuery', false);
-
 
 const connectDB = async () => {
     try{
@@ -31,25 +22,12 @@ const connectDB = async () => {
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(router);
 
 
-app.post('/chat-completion', async (req, res) => {
- 
-    try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: req.body.message }],
-      });
-
-      const reply = response.choices[0].message.content;
-  
-      console.log(reply);
-
-      res.json({ reply });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
+  app.get('/', (req, res) => {
+    res.send("<h1>Glitch-Express Server is OK. MongoDb is Connected.</h1>");
+})
 
 
   connectDB().then(() => {
