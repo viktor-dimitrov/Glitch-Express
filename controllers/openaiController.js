@@ -14,6 +14,8 @@ router.get('/ai', async (req, res) => {
 
 router.post('/ai', async (req, res) => {
  
+  console.log(req.body)
+
     try {
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
@@ -29,6 +31,6 @@ router.post('/ai', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
-
+ 
 
 export default router

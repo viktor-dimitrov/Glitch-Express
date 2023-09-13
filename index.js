@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import router from './router.js';
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.set('strictQuery', false);
 
