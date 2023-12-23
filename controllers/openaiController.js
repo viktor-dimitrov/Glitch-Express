@@ -8,11 +8,11 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
-router.get('/ai', async (req, res) => {
-        res.status(200).json({ok:true});
+router.get('/', async (req, res) => {
+        res.status(200).json({ok:true, ai:'chatgpt 3.5 turbo'});
 })
 
-router.post('/ai', async (req, res) => {
+router.post('/', async (req, res) => {
  
   console.log(req.body)
 
