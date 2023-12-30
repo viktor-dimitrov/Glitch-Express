@@ -31,24 +31,25 @@ app.use(cors());
 app.use(router);
 
 const server = createServer(app); 
+
 const io = new Server(server, {  cors: {
     origin: 'http://localhost:5173', // replace with the actual origin of your React app
     methods: ['GET', 'POST'],
   },});
 
-
+ 
 io.on('connection', (socket) => {
     console.log('New user connected');
 
     socket.on('sendMessage', (message) => {
-        socket.broadcast.emit('message', message);
-        console.log(message) // Broadcast the message to all connected clients
+       io.emit('reciveMessage', message);
+        console.log(message) 
     });
   
     socket.on('disconnect', () => {
       console.log('User disconnected');
     }); 
-  });
+  });  
 
 
 //   app.get('/', (req, res) => {
